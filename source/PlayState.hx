@@ -196,7 +196,7 @@ class PlayState extends MusicBeatState
 
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
-	public static var exitingSong:Bool = false;
+	public static var exitingsong:Bool = false;
 	public var startingSong:Bool = false;
 	private var updateTime:Bool = true;
 	public static var changedDifficulty:Bool = false;
@@ -3971,6 +3971,7 @@ class PlayState extends MusicBeatState
 				if (storyPlaylist.length <= 0)
 				{
 					callOnLuas('onExitSong', []);
+					exitingsong = true;
 					WeekData.loadTheFirstEnabledMod();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
@@ -3993,7 +3994,6 @@ class PlayState extends MusicBeatState
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
-					exitingSong = true;
 				}
 				else
 				{
@@ -4037,6 +4037,7 @@ class PlayState extends MusicBeatState
 			else
 			{
 				callOnLuas('onExitSong', []);
+				exitingsong = true;
 				trace('WENT BACK TO FREEPLAY??');
 				WeekData.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
@@ -4046,7 +4047,6 @@ class PlayState extends MusicBeatState
 				MusicBeatState.switchState(new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
-				exitingSong = true;
 			}
 			transitioning = true;
 		}

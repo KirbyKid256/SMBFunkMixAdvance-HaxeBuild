@@ -253,6 +253,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;
 				case "Exit to menu":
 					PlayState.instance.callOnLuas('onExitSong', []);
+					PlayState.exitingsong = true;
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 
@@ -265,7 +266,6 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
-					PlayState.exitingSong = true;
 					PlayState.chartingMode = false;
 			}
 		}
