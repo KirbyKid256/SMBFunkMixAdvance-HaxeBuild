@@ -1557,6 +1557,7 @@ class FunkinLua {
 			return true;
 		});
 		Lua_helper.add_callback(lua, "exitSong", function(?skipTransition:Bool = false) {
+			PlayState.instance.callOnLuas('onExitSong', []);
 			if(skipTransition)
 			{
 				FlxTransitionableState.skipNextTransIn = true;
@@ -1575,6 +1576,7 @@ class FunkinLua {
 
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			PlayState.changedDifficulty = false;
+			PlayState.exitingSong = true;
 			PlayState.chartingMode = false;
 			PlayState.instance.transitioning = true;
 			WeekData.loadTheFirstEnabledMod();
