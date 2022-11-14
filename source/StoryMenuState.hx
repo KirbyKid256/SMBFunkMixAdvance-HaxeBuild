@@ -327,6 +327,9 @@ class StoryMenuState extends MusicBeatState
 
 			var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
 			if(diffic == null) diffic = '';
+			
+			var newDiff:String = CoolUtil.checkJsonFilePath(PlayState.storyPlaylist[0].toLowerCase(), diffic, curDifficulty);
+			if(newDiff != null) diffic = newDiff;
 
 			PlayState.storyDifficulty = curDifficulty;
 
@@ -352,8 +355,6 @@ class StoryMenuState extends MusicBeatState
 			curDifficulty = CoolUtil.difficulties.length-1;
 		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
-
-		WeekData.setDirectoryFromWeek(loadedWeeks[curWeek]);
 
 		var diff:String = CoolUtil.difficulties[curDifficulty];
 		var newImage:FlxGraphic = Paths.image('menudifficulties/' + Paths.formatToSongPath(diff));

@@ -3076,7 +3076,7 @@ class PlayState extends MusicBeatState
 			iconP2.animation.curAnim.curFrame = 0;
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
-			callOnLuas('onExitSong', []);
+			callOnLuas('onOpenCharacterEditor', []);
 			exitingSong = true;
 			persistentUpdate = false;
 			paused = true;
@@ -3355,7 +3355,7 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
-		callOnLuas('onExitSong', []);
+		callOnLuas('onOpenChartEditor', []);
 		exitingSong = true;
 		persistentUpdate = false;
 		paused = true;
@@ -4002,6 +4002,9 @@ class PlayState extends MusicBeatState
 				else
 				{
 					var difficulty:String = CoolUtil.getDifficultyFilePath();
+					
+					var newDiff:String = CoolUtil.checkJsonFilePath(PlayState.storyPlaylist[0].toLowerCase(), difficulty, storyDifficulty);
+					if(newDiff != null) difficulty = newDiff;
 
 					trace('LOADING NEXT SONG');
 					trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + difficulty);
